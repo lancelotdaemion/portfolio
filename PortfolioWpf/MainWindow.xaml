@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <!--xmlns:local="clr-namespace:ArticleSample">-->
     <Grid Margin="25px">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -33,7 +32,7 @@
 
         <Grid Grid.Column="2">
             <Border Grid.Column="1" Grid.Row="0" BorderThickness="0" BorderBrush="Black" Margin="0" Padding="5px">
-                <Button Command="{Binding LoadImpsumsCommand}" Height="25px" VerticalAlignment="Top" Content="Add"/>
+                <Button Command="{Binding AddIpsumCommand}" Height="25px" VerticalAlignment="Top" Content="Add"/>
             </Border>
         </Grid>
     </Grid>

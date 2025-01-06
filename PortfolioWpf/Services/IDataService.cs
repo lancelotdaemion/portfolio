@@ -21,5 +21,6 @@ namespace PortfolioWpf.ViewModels
         T GetValue<T>(string key);
 
         Dictionary<Guid, string> GetIpsums();
+        void AddIpsum(string ipsum);
     }
 }

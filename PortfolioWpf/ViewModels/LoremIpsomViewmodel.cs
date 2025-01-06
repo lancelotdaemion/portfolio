@@ -12,11 +12,17 @@ namespace PortfolioWpf.ViewModels
 
         public string CurrentIpsum { get => _currentIpsum; private set => SetProperty(ref _currentIpsum, value); }
 
-        public Dictionary<Guid, string> Ipsums { get; set; } = new Dictionary<Guid, string>();
 
-        public IAsyncRelayCommand LoadImpsumsCommand => new AsyncRelayCommand(LoadIpsumsAsync);
+        private Dictionary<Guid, string> _ipsums;
+        public Dictionary<Guid, string> Ipsums { get => _ipsums; private set => SetProperty(ref _ipsums, value); }
+
+        public IAsyncRelayCommand LoadIpsumsCommand => new AsyncRelayCommand(LoadIpsumsAsync);
 
         private async Task LoadIpsumsAsync() => Ipsums = _dataService.GetIpsums();
+
+        public IRelayCommand AddIpsumCommand => new RelayCommand(AddIpsum);
+
+        private async Task AddIpsumAsync() => AddIpsum();
 
 
         public LoremIpsomViewModel(IDataService dataService)
@@ -28,7 +34,14 @@ namespace PortfolioWpf.ViewModels
             Ipsums = _dataService.GetIpsums();
         }
 
-        
+        private void AddIpsum()
+        {
+            _dataService.AddIpsum(CurrentIpsum);
+
+            CurrentIpsum = DefaultIpsom();
+
+            Ipsums = _dataService.GetIpsums();
+        }
 
         private string DefaultIpsom()
         {

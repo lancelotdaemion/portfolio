@@ -39,12 +39,23 @@ namespace PortfolioWpf.Services
         {
             _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
+            var rand = new Random();
+
             var ipsums = _context.LoremIpsums.ToDictionary(li => li.Id, li => li.Name);
 
-            if (ipsums.Count == 0)
-                ipsums = LoremIpsum.Collection.Values;
+            if (ipsums.Count() == 0)
+                ipsums = LoremIpsum.Collection.Values.OrderBy(x => rand.Next()).ToDictionary();
 
             return ipsums;
+        }
+
+        public void AddIpsum(string ipsum)
+        {
+            var ip = new Data.LoremIpsum {  Id = Guid.NewGuid(), Name = ipsum };
+
+            _context.Add(ip);
+
+            _context.SaveChanges();
         }
     }
 }
