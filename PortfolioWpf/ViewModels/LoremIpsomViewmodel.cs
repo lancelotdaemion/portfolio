@@ -16,7 +16,7 @@ namespace PortfolioWpf.ViewModels
             private set => SetProperty(ref _currentIpsum, value);
         }
 
-        public List<string> Ipsums { get; set; } = new List<string>();
+        public Dictionary<Guid, string> Ipsums { get; set; } = new Dictionary<Guid, string>();
 
         public IAsyncRelayCommand LoadCurrentIpsumCommand => new AsyncRelayCommand(LoadCurrentIpsumAsync);
 
@@ -27,18 +27,18 @@ namespace PortfolioWpf.ViewModels
             _dataService = dataService;
 
             CurrentIpsum = DefaultIpsom();
-            Ipsums = LoremIpsum.Collection.Values.ToList();
+            Ipsums = LoremIpsum.Collection.Values;
         }
 
-        private async Task LoadCurrentIpsumAsync() => Ipsums = Collection.Values.ToList();
+        private async Task LoadCurrentIpsumAsync() => Ipsums = Collection.Values;
 
         private string DefaultIpsom()
         {
             var rand = new Random();
 
-            var ipsumIndex = rand.Next(0, LoremIpsum.Collection.Values.Length - 1);
+            var ipsumIndex = rand.Next(0, LoremIpsum.Collection.Values.Count - 1);
 
-            return LoremIpsum.Collection.Values[ipsumIndex];
+            return LoremIpsum.Collection.Values.ElementAt(ipsumIndex).Value;
         }
     }
 }

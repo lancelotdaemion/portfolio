@@ -14,9 +14,9 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}">
+        <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Ipsums, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Value, Mode=OneWay}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
