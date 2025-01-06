@@ -1,4 +1,5 @@
-﻿using PortfolioWpf.ViewModels;
+﻿using PortfolioWpf.Data;
+using PortfolioWpf.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,21 @@ namespace PortfolioWpf.Services
 {
     public class DataService : IDataService
     {
+        private readonly LoremIpsumContext _context;
+
+        public DataService(LoremIpsumContext context)
+        {
+            _context = context;
+
+            // this is for demo purposes only, to make it easier
+            // to get up and running
+            //_context.Database.EnsureCreated();
+
+            // load the entities into EF Core
+            //_context.LoremIpsums..Load();
+
+        }
+
         public T GetValue<T>(string key)
         {
             return default;
@@ -17,6 +33,13 @@ namespace PortfolioWpf.Services
         public void SetValue<T>(string key, T value)
         {
             //throw new NotImplementedException();
+        }
+
+        public Dictionary<Guid, string> GetIpsums()
+        {
+            var results = _context.LoremIpsums.ToDictionary(li => li.Id, li => li.Name);
+
+            return results;
         }
     }
 }

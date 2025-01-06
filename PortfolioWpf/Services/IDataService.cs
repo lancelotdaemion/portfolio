@@ -19,5 +19,7 @@ namespace PortfolioWpf.ViewModels
         /// <param name="key">The key associated to the requested object.</param>
         [Pure]
         T GetValue<T>(string key);
+
+        Dictionary<Guid, string> GetIpsums();
     }
 }

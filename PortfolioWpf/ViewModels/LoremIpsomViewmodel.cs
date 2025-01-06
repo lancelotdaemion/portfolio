@@ -10,11 +10,7 @@ namespace PortfolioWpf.ViewModels
 
         private string _currentIpsum;
 
-        public string CurrentIpsum
-        {
-            get => _currentIpsum;
-            private set => SetProperty(ref _currentIpsum, value);
-        }
+        public string CurrentIpsum { get => _currentIpsum; private set => SetProperty(ref _currentIpsum, value); }
 
         public Dictionary<Guid, string> Ipsums { get; set; } = new Dictionary<Guid, string>();
 
@@ -28,7 +24,11 @@ namespace PortfolioWpf.ViewModels
             _dataService = dataService;
 
             CurrentIpsum = DefaultIpsom();
-            Ipsums = LoremIpsum.Collection.Values;
+
+            Ipsums = _dataService.GetIpsums();
+            
+            if (Ipsums.Count == 0)
+                Ipsums = LoremIpsum.Collection.Values;
         }
 
         

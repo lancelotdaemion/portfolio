@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using PortfolioWpf;
+using PortfolioWpf.Data;
 using PortfolioWpf.Services;
 using PortfolioWpf.ViewModels;
 using SimpleInjector;
@@ -23,11 +24,14 @@ static class Program
         // Create the container as usual.
         var container = new SimpleInjector.Container();
 
+        container.Register<LoremIpsumContext>(Lifestyle.Singleton);
+
         // Register your types, for instance:
         container.Register<IDataService, DataService>(Lifestyle.Singleton);
 
         // Register your windows and view models:
         container.Register<MainWindow>();
+        
         container.Register<LoremIpsomViewModel>();
 
         container.Verify();
