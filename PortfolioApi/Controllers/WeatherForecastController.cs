@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace PortfolioWeb.Controllers
+namespace PortfolioApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
