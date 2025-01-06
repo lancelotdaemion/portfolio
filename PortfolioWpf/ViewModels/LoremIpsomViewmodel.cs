@@ -16,7 +16,7 @@ namespace PortfolioWpf.ViewModels
 
         public IAsyncRelayCommand LoadImpsumsCommand => new AsyncRelayCommand(LoadIpsumsAsync);
 
-        private async Task LoadIpsumsAsync() => Ipsums = Collection.Values;
+        private async Task LoadIpsumsAsync() => Ipsums = _dataService.GetIpsums();
 
 
         public LoremIpsomViewModel(IDataService dataService)
@@ -26,9 +26,6 @@ namespace PortfolioWpf.ViewModels
             CurrentIpsum = DefaultIpsom();
 
             Ipsums = _dataService.GetIpsums();
-            
-            if (Ipsums.Count == 0)
-                Ipsums = LoremIpsum.Collection.Values;
         }
 
         

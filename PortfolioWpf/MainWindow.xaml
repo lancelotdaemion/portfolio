@@ -11,8 +11,8 @@
     <Grid Margin="25px">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="85px"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}" AutoGenerateColumns="False">
@@ -32,7 +32,9 @@
         </Grid>
 
         <Grid Grid.Column="2">
-            <Button Command="{Binding LoadImpsumsCommand}"/>
+            <Border Grid.Column="1" Grid.Row="0" BorderThickness="0" BorderBrush="Black" Margin="0" Padding="5px">
+                <Button Command="{Binding LoadImpsumsCommand}" Height="25px" VerticalAlignment="Top" Content="Add"/>
+            </Border>
         </Grid>
     </Grid>
 </Window>

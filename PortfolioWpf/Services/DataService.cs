@@ -37,9 +37,14 @@ namespace PortfolioWpf.Services
 
         public Dictionary<Guid, string> GetIpsums()
         {
-            var results = _context.LoremIpsums.ToDictionary(li => li.Id, li => li.Name);
+            _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
-            return results;
+            var ipsums = _context.LoremIpsums.ToDictionary(li => li.Id, li => li.Name);
+
+            if (ipsums.Count == 0)
+                ipsums = LoremIpsum.Collection.Values;
+
+            return ipsums;
         }
     }
 }
