@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PortfolioWpf.Data;
 using PortfolioWpf.LoremIpsum;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PortfolioWpf.ViewModels
 {
@@ -13,8 +16,8 @@ namespace PortfolioWpf.ViewModels
         public string CurrentIpsum { get => _currentIpsum; private set => SetProperty(ref _currentIpsum, value); }
 
 
-        private Dictionary<Guid, string> _ipsums;
-        public Dictionary<Guid, string> Ipsums { get => _ipsums; private set => SetProperty(ref _ipsums, value); }
+        private ObservableCollection<Data.LoremIpsum> _ipsums;
+        public ObservableCollection<Data.LoremIpsum> Ipsums { get => _ipsums; private set => SetProperty(ref _ipsums, value); }
 
         public IAsyncRelayCommand LoadIpsumsCommand => new AsyncRelayCommand(LoadIpsumsAsync);
 
@@ -36,11 +39,13 @@ namespace PortfolioWpf.ViewModels
 
         private void AddIpsum()
         {
-            _dataService.AddIpsum(CurrentIpsum);
+            var newipsum = _dataService.AddIpsum(CurrentIpsum);
+
+            Ipsums.Add(new Data.LoremIpsum { Id = newipsum.Id, Name = newipsum.Name });
 
             CurrentIpsum = DefaultIpsom();
 
-            Ipsums = _dataService.GetIpsums();
+            //Ipsums = _dataService.GetIpsums();
         }
 
         private string DefaultIpsom()
@@ -49,7 +54,7 @@ namespace PortfolioWpf.ViewModels
 
             var ipsumIndex = rand.Next(0, LoremIpsum.Collection.Values.Count - 1);
 
-            return LoremIpsum.Collection.Values.ElementAt(ipsumIndex).Value;
+            return LoremIpsum.Collection.Values.ElementAt(ipsumIndex).Name;
         }
     }
 }

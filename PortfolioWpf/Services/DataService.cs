@@ -2,6 +2,8 @@
 using PortfolioWpf.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,47 +17,35 @@ namespace PortfolioWpf.Services
         public DataService(LoremIpsumContext context)
         {
             _context = context;
-
-            // this is for demo purposes only, to make it easier
-            // to get up and running
-            //_context.Database.EnsureCreated();
-
-            // load the entities into EF Core
-            //_context.LoremIpsums..Load();
-
         }
 
-        public T GetValue<T>(string key)
-        {
-            return default;
-        }
-
-        public void SetValue<T>(string key, T value)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public Dictionary<Guid, string> GetIpsums()
+        public ObservableCollection<Data.LoremIpsum> GetIpsums()
         {
             _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
             var rand = new Random();
 
-            var ipsums = _context.LoremIpsums.ToDictionary(li => li.Id, li => li.Name);
+            var ipsums = _context.LoremIpsums;
 
-            if (ipsums.Count() == 0)
-                ipsums = LoremIpsum.Collection.Values.OrderBy(x => rand.Next()).ToDictionary();
+            //if (ipsums.Count() == 0)
+            //    ipsums = LoremIpsum.Collection.Values.OrderBy(x => rand.Next()).ToList();
 
-            return ipsums;
+            return new ObservableCollection<Data.LoremIpsum>(ipsums);
         }
 
-        public void AddIpsum(string ipsum)
+        public Data.LoremIpsum AddIpsum(string ipsum)
         {
             var ip = new Data.LoremIpsum {  Id = Guid.NewGuid(), Name = ipsum };
+
+            // send queue message
 
             _context.Add(ip);
 
             _context.SaveChanges();
+
+            return ip;
+
+            
         }
     }
 }

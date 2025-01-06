@@ -16,7 +16,7 @@
 
         <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Value, Mode=OneWay}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Name, Mode=OneWay}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
