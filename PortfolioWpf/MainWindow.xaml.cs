@@ -1,29 +1,20 @@
-﻿using PortfolioWpf.ViewModels;
+﻿using PortfolioWpf.Services;
+using PortfolioWpf.ViewModels;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PortfolioWpf
 {
     public partial class MainWindow : Window
     {
-        private readonly LoremIpsomViewModel _viewmodel;
 
-        public MainWindow()
+        public LoremIpsomViewModel ViewModel => (LoremIpsomViewModel)DataContext;
+
+        public MainWindow(LoremIpsomViewModel viewModel)
         {
             InitializeComponent();
 
-            _viewmodel = new LoremIpsomViewModel(DefaultIpsom()); 
-            DataContext = _viewmodel;
-
-            //LoadIpsum();
-        }
-
-        private string DefaultIpsom()
-        {
-            var rand = new Random();
-
-            var ipsumIndex = rand.Next(0, LoremIpsum.Collection.Values.Length - 1);
-
-            return LoremIpsum.Collection.Values[ipsumIndex];
+            this.DataContext = viewModel;
         }
     }
 }   

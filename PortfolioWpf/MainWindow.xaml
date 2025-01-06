@@ -16,10 +16,10 @@
 
         <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding CurrentIpsum}"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Ipsums, Mode=OneWay}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox Grid.Column="1" Text="{Binding CurrentIpsum}"></TextBox>
+        <TextBox Grid.Column="1" Text="{Binding CurrentIpsum, Mode=OneWay}"></TextBox>
     </Grid>
 </Window>
