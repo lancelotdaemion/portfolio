@@ -6,7 +6,20 @@
         xmlns:local="clr-namespace:PortfolioWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+    <!--xmlns:local="clr-namespace:ArticleSample">-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding CurrentIpsum}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox Grid.Column="1" Text="{Binding CurrentIpsum}"></TextBox>
     </Grid>
 </Window>

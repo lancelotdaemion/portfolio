@@ -1,24 +1,29 @@
-﻿using System.Text;
+﻿using PortfolioWpf.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PortfolioWpf
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly LoremIpsomViewModel _viewmodel;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _viewmodel = new LoremIpsomViewModel(DefaultIpsom()); 
+            DataContext = _viewmodel;
+
+            //LoadIpsum();
+        }
+
+        private string DefaultIpsom()
+        {
+            var rand = new Random();
+
+            var ipsumIndex = rand.Next(0, LoremIpsum.Collection.Values.Length - 1);
+
+            return LoremIpsum.Collection.Values[ipsumIndex];
         }
     }
-}
+}   
