@@ -8,18 +8,31 @@
         Title="MainWindow" Height="450" Width="800">
 
     <!--xmlns:local="clr-namespace:ArticleSample">-->
-    <Grid>
+    <Grid Margin="25px">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <DataGrid Grid.Column="0" ItemsSource="{Binding Ipsums}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Value, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Value, Mode=OneWay}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox Grid.Column="1" Text="{Binding CurrentIpsum, Mode=OneWay}"></TextBox>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="Black" Margin="15 0" Padding="5px">
+                <TextBlock Text="{Binding CurrentIpsum, Mode=OneWay}" Height="20px"></TextBlock>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Button Command="{Binding LoadImpsumsCommand}"/>
+        </Grid>
     </Grid>
 </Window>
