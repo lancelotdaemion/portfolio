@@ -1,4 +1,5 @@
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace PortfolioFunction
@@ -11,6 +12,7 @@ namespace PortfolioFunction
 
             var host = new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults()
+                .ConfigureServices(a => a.AddSingleton<ServiceBusContext>((s) => { return new ServiceBusContext(); }))
                 .Build();
 
             host.Run();

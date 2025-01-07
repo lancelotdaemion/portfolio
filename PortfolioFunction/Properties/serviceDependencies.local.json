@@ -11,9 +11,12 @@
       "type": "secrets.user"
     },
     "storage2": {
+      "containerPorts": "10000:10000,10001:10001,10002:10002",
       "secretStore": "LocalSecretsFile",
-      "type": "storage.emulator",
-      "connectionId": "function_settings",
+      "containerName": "azurite",
+      "containerImage": "mcr.microsoft.com/azure-storage/azurite",
+      "type": "storage.container",
+      "connectionId": "StorageConnection",
       "dynamicId": null
     }
   }
