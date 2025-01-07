@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PortfolioWpf.Data;
 using PortfolioWpf.LoremIpsum;
+using PortfolioWpf.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -10,6 +11,7 @@ namespace PortfolioWpf.ViewModels
     public class LoremIpsomViewModel : ObservableRecipient
     {
         private readonly IDataService _dataService;
+        private readonly IAzureService _azureBusService;
 
         private string _currentIpsum;
 
@@ -28,9 +30,10 @@ namespace PortfolioWpf.ViewModels
         private async Task AddIpsumAsync() => AddIpsum();
 
 
-        public LoremIpsomViewModel(IDataService dataService)
+        public LoremIpsomViewModel(IDataService dataService, IAzureService azureBusService)
         {
             _dataService = dataService;
+            _azureBusService = azureBusService;
 
             CurrentIpsum = DefaultIpsom();
 
@@ -45,7 +48,7 @@ namespace PortfolioWpf.ViewModels
 
             CurrentIpsum = DefaultIpsom();
 
-            //Ipsums = _dataService.GetIpsums();
+            _azureBusService.SendLoremIpsum(newipsum);
         }
 
         private string DefaultIpsom()

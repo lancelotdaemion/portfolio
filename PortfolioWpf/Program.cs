@@ -25,9 +25,11 @@ static class Program
         var container = new SimpleInjector.Container();
 
         container.Register<LoremIpsumContext>(Lifestyle.Singleton);
+        container.Register<ServiceBusContext>(Lifestyle.Singleton);
 
         // Register your types, for instance:
         container.Register<IDataService, DataService>(Lifestyle.Singleton);
+        container.Register<IAzureService, AzureService>(Lifestyle.Singleton);
 
         // Register your windows and view models:
         container.Register<MainWindow>();
