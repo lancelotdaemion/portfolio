@@ -16,11 +16,13 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Name, Mode=OneWay}" Width="*"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Name, Mode=OneWay}" Width="*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
