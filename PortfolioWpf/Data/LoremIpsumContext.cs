@@ -11,7 +11,6 @@ namespace PortfolioWpf.Data
     {
         public DbSet<LoremIpsum> LoremIpsums { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseAzureSql( "Data Source=products.db");

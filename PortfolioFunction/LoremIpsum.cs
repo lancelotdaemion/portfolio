@@ -1,4 +1,6 @@
-﻿namespace PortfolioWpf.Data
+﻿using System;
+
+namespace PortfolioFunction
 {
     public class LoremIpsum
     {
