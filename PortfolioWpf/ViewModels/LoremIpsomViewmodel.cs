@@ -1,57 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using PortfolioWpf.Data;
-using PortfolioWpf.LoremIpsum;
 using PortfolioWpf.Services;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace PortfolioWpf.ViewModels
 {
-    public class LoremIpsomViewModel : ObservableRecipient
+    public partial class LoremIpsomViewModel : ObservableRecipient
     {
         private readonly IDataService _dataService;
         private readonly IAzureService _azureBusService;
-
-        private string _currentIpsum;
-
-        public string CurrentIpsum { get => _currentIpsum; private set => SetProperty(ref _currentIpsum, value); }
-
-
-        private ObservableCollection<Data.LoremIpsum> _ipsums;
-        public ObservableCollection<Data.LoremIpsum> Ipsums { get => _ipsums; private set => SetProperty(ref _ipsums, value); }
-
-        public IAsyncRelayCommand LoadIpsumsCommand => new AsyncRelayCommand(LoadIpsumsAsync);
-
-        private async Task LoadIpsumsAsync() => Ipsums = _dataService.GetIpsums();
-
-        public IRelayCommand AddIpsumCommand => new RelayCommand(AddIpsum);
-
-        private async Task AddIpsumAsync() => AddIpsum();
-
 
         public LoremIpsomViewModel(IDataService dataService, IAzureService azureBusService)
         {
             _dataService = dataService;
             _azureBusService = azureBusService;
 
-            CurrentIpsum = DefaultIpsom();
+            CurrentIpsumText = DefaultIpsomText();
 
             Ipsums = _dataService.GetIpsums();
         }
 
-        private void AddIpsum()
-        {
-            var newipsum = _dataService.AddIpsum(CurrentIpsum);
+        private async Task LoadIpsumsAsync() => Ipsums = _dataService.GetIpsums();
 
-            Ipsums.Add(new Data.LoremIpsum { Id = newipsum.Id, Name = newipsum.Name });
+        
 
-            CurrentIpsum = DefaultIpsom();
-
-            _azureBusService.SendLoremIpsum(newipsum);
-        }
-
-        private string DefaultIpsom()
+        private string DefaultIpsomText()
         {
             var rand = new Random();
 
@@ -59,5 +30,22 @@ namespace PortfolioWpf.ViewModels
 
             return LoremIpsum.Collection.Values.ElementAt(ipsumIndex).Name;
         }
+
+
+
+        private void AddIpsum()
+        {
+            var newIpsum = _dataService.AddIpsum(CurrentIpsumText);
+
+            Ipsums.Add(new Data.LoremIpsum { Id = newIpsum.Id, Name = newIpsum.Name });
+
+            CurrentIpsumText = DefaultIpsomText();
+
+            _azureBusService.AddIpsum(newIpsum);
+        }
+
+        private void UpdateIpsum() => _azureBusService.UpdateIpsum(SelectedLoremIpsum);
+
+        private void DeleteIpsum() => _azureBusService.DeleteIpsum(SelectedLoremIpsum);
     }
 }

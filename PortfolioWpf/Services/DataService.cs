@@ -34,12 +34,6 @@ namespace PortfolioWpf.Services
         {
             var ip = new Data.LoremIpsum {  Id = Guid.NewGuid(), Name = ipsum };
 
-            // send queue message
-
-            //_context.Add(ip);
-
-            //_context.SaveChanges();
-
             return ip;
         }
     }

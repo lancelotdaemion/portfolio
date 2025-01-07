@@ -7,7 +7,9 @@ namespace PortfolioWpf.Services
 {
     public interface IAzureService
     {
-        Task SendLoremIpsum(Data.LoremIpsum ipsum);
+        Task AddIpsum(Data.LoremIpsum ipsum);
+        Task UpdateIpsum(Data.LoremIpsum ipsum);
+        Task DeleteIpsum(Data.LoremIpsum ipsum);
     }
 
     public class AzureService : IAzureService
@@ -15,12 +17,33 @@ namespace PortfolioWpf.Services
         private readonly ServiceBusContext _context;
         private JsonSerializerOptions _jsonOptions = new() { WriteIndented = false };
 
-    public AzureService (ServiceBusContext context)
+        public AzureService (ServiceBusContext context)
         {
             _context = context;
         }
 
-        public async Task SendLoremIpsum(Data.LoremIpsum ipsum) 
+        public async Task AddIpsum(Data.LoremIpsum ipsum) 
+        {
+            ipsum.Type = LoremIpsumType.Add;
+
+            await Send(ipsum);
+        }
+
+        public async Task UpdateIpsum(Data.LoremIpsum ipsum)
+        {
+            ipsum.Type = LoremIpsumType.Edit;
+
+            await Send(ipsum);
+        }
+
+        public async Task DeleteIpsum(Data.LoremIpsum ipsum)
+        {
+            ipsum.Type = LoremIpsumType.Delete;
+
+            await Send(ipsum);
+        }
+
+        private async Task Send(Data.LoremIpsum ipsum)
         {
             await using var client = new ServiceBusClient(_context.ConnectionString);
 
