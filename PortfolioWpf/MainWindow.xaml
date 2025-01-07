@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PortfolioWpf"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -20,10 +21,6 @@
         <!-- DataGrid -->
         <ScrollViewer VerticalScrollBarVisibility="Visible">
             <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" SelectedItem="{Binding SelectedLoremIpsum, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False">
-                
-                <!--<EventTrigger>
-                    <
-                </EventTrigger>-->
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditIpsumCommand}"/>
@@ -37,7 +34,15 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteIpsumCommand}" Height="25px" Width="55px" VerticalAlignment="Top" Content="Delete"/>
+                                    <!-- https://github.com/SKProCH/Material.Icons/?tab=readme-ov-file -->
+                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteIpsumCommand}" Height="25px" Width="55px" VerticalAlignment="Top">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <!--<Image Source="{materialIcons:MaterialIconExt Kind=Abacus}"/>-->
+                                                <materialIcons:MaterialIcon Foreground="DarkRed" Height="20px" Kind="Delete" Cursor="Hand" />
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -52,15 +57,42 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black" Margin="0 15" Padding="5px" Height="30px" VerticalAlignment="Top">
-                <TextBlock Text="{Binding CurrentIpsumText , Mode=OneWay}" Height="20px"></TextBlock>
+            <Border Grid.Column="0" Margin="0 15 0 0" Padding="5px" VerticalAlignment="Top">
+                <TextBox Text="{Binding CurrentIpsumText , Mode=TwoWay}" Height="25px"></TextBox>
             </Border>
 
             <Grid Grid.Column="1">
                 <Border Grid.Column="1" BorderThickness="0" BorderBrush="Black" Margin="0 15 0 0" Padding="5px" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Button Command="{Binding AddIpsumCommand}" Height="25px" Width="35px" VerticalAlignment="Top" Content="Add"/>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Border Grid.Column="2" BorderThickness="0" BorderBrush="Black" Margin="0 15 0 0" Padding="5px" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button Command="{Binding DeleteAllCommand}" Height="25px" VerticalAlignment="Top" Content="Delete All">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <TextBlock TextDecorations="Underline">
+                                                <ContentPresenter /></TextBlock>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="Blue" />        
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Foreground" Value="Red" />
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Border>
             </Grid>
         </Grid>

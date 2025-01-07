@@ -6,7 +6,8 @@ namespace PortfolioFunction
     {
         Add = 0,
         Edit = 1,
-        Delete = 2
+        Delete = 2,
+        DeleteAll = 3
     }
 
     public class LoremIpsum

@@ -2,6 +2,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using PortfolioFunctions;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text.Json;
 
 namespace PortfolioFunction
@@ -45,6 +46,10 @@ namespace PortfolioFunction
                         var dbIpsumToDelete = db.LoremIpsums.Where(li => li.Id == ipsum.Id).Single();
 
                         db.LoremIpsums.Remove(dbIpsumToDelete);
+
+                        break;
+                    case LoremIpsumType.DeleteAll:
+                        db.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.LoremIpsums");
 
                         break;
                 }

@@ -10,6 +10,7 @@ namespace PortfolioWpf.Services
         Task AddIpsum(Data.LoremIpsum ipsum);
         Task UpdateIpsum(Data.LoremIpsum ipsum);
         Task DeleteIpsum(Data.LoremIpsum ipsum);
+        Task DeleteAll();
     }
 
     public class AzureService : IAzureService
@@ -39,6 +40,15 @@ namespace PortfolioWpf.Services
         public async Task DeleteIpsum(Data.LoremIpsum ipsum)
         {
             ipsum.Type = LoremIpsumType.Delete;
+
+            await Send(ipsum);
+        }
+
+        public async Task DeleteAll()
+        {
+            var ipsum = new Data.LoremIpsum();
+
+            ipsum.Type = LoremIpsumType.DeleteAll;
 
             await Send(ipsum);
         }

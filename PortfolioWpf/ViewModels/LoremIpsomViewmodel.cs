@@ -46,6 +46,18 @@ namespace PortfolioWpf.ViewModels
 
         private void UpdateIpsum() => _azureBusService.UpdateIpsum(SelectedLoremIpsum);
 
-        private void DeleteIpsum() => _azureBusService.DeleteIpsum(SelectedLoremIpsum);
+        private void DeleteIpsum()
+        {
+            _azureBusService.DeleteIpsum(SelectedLoremIpsum);
+
+            Ipsums.Remove(SelectedLoremIpsum);
+        }
+
+        private void DeleteAll()
+        {
+            _azureBusService.DeleteAll();
+
+            Ipsums.Clear();
+        }
     }
 }

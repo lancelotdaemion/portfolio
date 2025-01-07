@@ -8,7 +8,7 @@ namespace PortfolioWpf.ViewModels
         private string _currentIpsum;
         private Data.LoremIpsum _selectedLoremIpsum;
 
-        public string CurrentIpsumText { get => _currentIpsum; private set => SetProperty(ref _currentIpsum, value); }
+        public string CurrentIpsumText { get => _currentIpsum; set => SetProperty(ref _currentIpsum, value); }
 
         public Data.LoremIpsum SelectedLoremIpsum { get => _selectedLoremIpsum; set => SetProperty(ref _selectedLoremIpsum, value); }
 
@@ -24,5 +24,6 @@ namespace PortfolioWpf.ViewModels
         public IRelayCommand EditIpsumCommand => new RelayCommand(UpdateIpsum);
 
         public IRelayCommand DeleteIpsumCommand => new RelayCommand(DeleteIpsum);
+        public IRelayCommand DeleteAllCommand => new RelayCommand(DeleteAll);
     }
 }
