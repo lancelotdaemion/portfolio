@@ -1,5 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
 using PortfolioWpf.Data;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace PortfolioWpf.Services
 {
@@ -11,8 +13,9 @@ namespace PortfolioWpf.Services
     public class AzureService : IAzureService
     {
         private readonly ServiceBusContext _context;
+        private JsonSerializerOptions _jsonOptions = new() { WriteIndented = false };
 
-        public AzureService (ServiceBusContext context)
+    public AzureService (ServiceBusContext context)
         {
             _context = context;
         }
@@ -21,9 +24,11 @@ namespace PortfolioWpf.Services
         {
             await using var client = new ServiceBusClient(_context.ConnectionString);
 
-            ServiceBusSender sender = client.CreateSender(_context.QueueName);
+            var sender = client.CreateSender(_context.QueueName);
 
-            ServiceBusMessage message = new ServiceBusMessage("Hello world! ");
+            var json = JsonSerializer.Serialize(ipsum, _jsonOptions);
+
+            var message = new ServiceBusMessage(json);
 
             await sender.SendMessageAsync(message);
         }
