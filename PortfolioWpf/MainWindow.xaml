@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PortfolioWpf"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -18,16 +19,24 @@
 
         <!-- DataGrid -->
         <ScrollViewer VerticalScrollBarVisibility="Visible">
-            <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" SelectedItem="{Binding SelectedLoremIpsum, Mode=TwoWay}" AutoGenerateColumns="False">
+            <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" SelectedItem="{Binding SelectedLoremIpsum, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False">
+                
+                <!--<EventTrigger>
+                    <
+                </EventTrigger>-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="CellEditEnding">
+                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditIpsumCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=Name, Mode=OneWay}" Width="8*"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Path=Value, Mode=TwoWay}" Width="1*"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="1*"></DataGridTextColumn>
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <!--<Button Name="Delete" Content="Delete" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteCommand}" 
-                                            CommandParameter="Binding">-->
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteIpsumCommand}" Height="25px" Width="55px" VerticalAlignment="Top" Content="Delete"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -46,7 +55,7 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black" Margin="0 15" Padding="5px" Height="30px" VerticalAlignment="Top">
-                <TextBlock Text="{Binding CurrentIpsum, Mode=OneWay}" Height="20px"></TextBlock>
+                <TextBlock Text="{Binding CurrentIpsumText , Mode=OneWay}" Height="20px"></TextBlock>
             </Border>
 
             <Grid Grid.Column="1">

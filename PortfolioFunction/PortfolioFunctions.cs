@@ -1,6 +1,7 @@
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using PortfolioFunctions;
+using System.Linq;
 using System.Text.Json;
 
 namespace PortfolioFunction
@@ -8,14 +9,14 @@ namespace PortfolioFunction
     public class PortfolioFunctions
     {
         private readonly ILogger _logger;
-        private readonly ServiceBusContext _servicebusContext;
-        private readonly LoremIpsumContext _loremIpsumContext;
+        //private readonly ServiceBusContext _servicebusContext;
+        //private readonly LoremIpsumContext _loremIpsumContext;
 
         public PortfolioFunctions(ILoggerFactory loggerFactory, ServiceBusContext servicebusContext, LoremIpsumContext loremIpsumContext)
         {
             _logger = loggerFactory.CreateLogger<PortfolioFunctions>();
-            _servicebusContext = servicebusContext;
-            _loremIpsumContext = loremIpsumContext;
+            //_servicebusContext = servicebusContext;
+            //_loremIpsumContext = loremIpsumContext;
         }
 
         [Function("PortfolioFunctions")]
@@ -27,7 +28,28 @@ namespace PortfolioFunction
 
             using (var db = new LoremIpsumContext())
             {
-                string s = "";
+                switch (ipsum.Type)
+                {
+                    case LoremIpsumType.Add:
+                        db.LoremIpsums.Add(ipsum);
+
+                        break;
+                    case LoremIpsumType.Edit:
+                        var dbIpsumToEdit = db.LoremIpsums.Where(li => li.Id == ipsum.Id).Single();
+
+                        dbIpsumToEdit.Name = ipsum.Name;
+                        dbIpsumToEdit.Value = ipsum.Value;
+
+                        break;
+                    case LoremIpsumType.Delete:
+                        var dbIpsumToDelete = db.LoremIpsums.Where(li => li.Id == ipsum.Id).Single();
+
+                        db.LoremIpsums.Remove(dbIpsumToDelete);
+
+                        break;
+                }
+                
+                db.SaveChanges();
             }
         }
     }
