@@ -23,7 +23,7 @@
 	<h2>{name}</h2>
 
 	{#each loremIpsums as ipsum}
-		*{ipsum.name}
+		{ipsum.name}
 	{/each}
 </main>
 
