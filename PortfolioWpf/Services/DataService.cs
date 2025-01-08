@@ -1,6 +1,10 @@
-﻿using PortfolioWpf.Data;
+﻿using Microsoft.Azure.Amqp.Framing;
+using PortfolioWpf.Data;
 using PortfolioWpf.ViewModels;
 using System.Collections.ObjectModel;
+using System.Numerics;
+using System.Windows.Controls;
+using static Microsoft.Azure.Amqp.Serialization.SerializableType;
 
 namespace PortfolioWpf.Services
 {
@@ -33,6 +37,14 @@ namespace PortfolioWpf.Services
         public Data.LoremIpsum AddIpsum(string ipsum)
         {
             var ip = new Data.LoremIpsum {  Id = Guid.NewGuid(), Name = ipsum };
+
+            var random = new Random();
+
+            var doub = random.NextDouble() * (10000 - 0) + 0;
+
+            var dec = Convert.ToDecimal(doub);
+
+            ip.Value = Math.Round(dec, 2);
 
             return ip;
         }
