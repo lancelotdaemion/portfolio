@@ -20,7 +20,7 @@
 
         <!-- DataGrid -->
         <ScrollViewer VerticalScrollBarVisibility="Visible">
-            <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" SelectedItem="{Binding SelectedLoremIpsum, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False">
+            <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Ipsums}" SelectedItem="{Binding SelectedLoremIpsum, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" AlternationCount="2" AlternatingRowBackground="FloralWhite">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="CellEditEnding">
                         <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.EditIpsumCommand}"/>
