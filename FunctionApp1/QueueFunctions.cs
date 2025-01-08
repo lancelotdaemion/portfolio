@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,7 +10,7 @@ namespace FunctionApp1
     public static class QueueFunctions
     {
         [FunctionName("LoremIpsumChange")]
-        public static void LoremIpsumChange([ServiceBusTrigger("portfolio", Connection = "")]string queueItem, ILogger log)
+        public static void LoremIpsumChange([ServiceBusTrigger("portfolio", Connection = "sbConn")] string queueItem, ILogger log)
         {
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {queueItem}");
 
