@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PortfolioFunctions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7081 --verbose"
+    }
+  }
+}
