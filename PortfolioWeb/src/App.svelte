@@ -22,9 +22,14 @@
 <main>
 	<h2>{name}</h2>
 
-	{#each loremIpsums as ipsum}
-		{ipsum.name}
-	{/each}
+	<table>
+		{#each loremIpsums as ipsum}
+			<tr>
+				<td>{ipsum.name}</td>
+				<td>{ipsum.value}</td>
+			</tr>
+		{/each}		
+	</table>
 </main>
 
 <style>
