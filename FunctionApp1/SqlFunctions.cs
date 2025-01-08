@@ -13,8 +13,8 @@ namespace FunctionApp1
     public static class SqlTriggerBinding
     {
         // Visit https://aka.ms/sqltrigger to learn how to use this trigger binding
-        [FunctionName("Function1")]
-        public static void Run([SqlTrigger("[dbo].[table1]", "")] IReadOnlyList<SqlChange<ToDoItem>> changes, ILogger log)
+        [FunctionName("SqlFunction")]
+        public static void SqlFunction([SqlTrigger("[dbo].[LoremIpsums]", "sqlConn")] IReadOnlyList<SqlChange<LoremIpsum>> changes, ILogger log)
         {
             log.LogInformation("SQL Changes: " + JsonConvert.SerializeObject(changes));
 
