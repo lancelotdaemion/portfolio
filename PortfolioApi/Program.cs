@@ -9,6 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddScoped(http => new HttpClient());
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();

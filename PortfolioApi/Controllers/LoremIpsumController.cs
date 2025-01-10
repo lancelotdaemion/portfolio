@@ -15,7 +15,7 @@ namespace PortfolioApi.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Route("/api/Ipsums")]
         public IEnumerable<LoremIpsum> Ipsums()
         {
             using (var db = new LoremIpsumContext())
