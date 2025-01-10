@@ -29,7 +29,7 @@ static class Program
 
         // Register your types, for instance:
         container.Register<IDataService, DataService>(Lifestyle.Singleton);
-        container.Register<IAzureService, AzureService>(Lifestyle.Singleton);
+        container.Register<IQueueService, QueueService>(Lifestyle.Singleton);
 
         // Register your windows and view models:
         container.Register<MainWindow>();

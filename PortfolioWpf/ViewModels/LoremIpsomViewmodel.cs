@@ -6,12 +6,12 @@ namespace PortfolioWpf.ViewModels
     public partial class LoremIpsomViewModel : ObservableRecipient
     {
         private readonly IDataService _dataService;
-        private readonly IAzureService _azureBusService;
+        private readonly IQueueService _queueService;
 
-        public LoremIpsomViewModel(IDataService dataService, IAzureService azureBusService)
+        public LoremIpsomViewModel(IDataService dataService, IQueueService azureQueueService)
         {
             _dataService = dataService;
-            _azureBusService = azureBusService;
+            _queueService = azureQueueService;
 
             CurrentIpsumText = DefaultIpsomText();
 
@@ -41,21 +41,21 @@ namespace PortfolioWpf.ViewModels
 
             CurrentIpsumText = DefaultIpsomText();
 
-            _azureBusService.AddIpsum(newIpsum);
+            _queueService.AddIpsum(newIpsum);
         }
 
-        private void UpdateIpsum() => _azureBusService.UpdateIpsum(SelectedLoremIpsum);
+        private void UpdateIpsum() => _queueService.UpdateIpsum(SelectedLoremIpsum);
 
         private void DeleteIpsum()
         {
-            _azureBusService.DeleteIpsum(SelectedLoremIpsum);
+            _queueService.DeleteIpsum(SelectedLoremIpsum);
 
             Ipsums.Remove(SelectedLoremIpsum);
         }
 
         private void DeleteAll()
         {
-            _azureBusService.DeleteAll();
+            _queueService.DeleteAll();
 
             Ipsums.Clear();
         }

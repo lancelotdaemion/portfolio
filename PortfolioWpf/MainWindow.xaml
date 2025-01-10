@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="User Simulator" Height="450" Width="800">
 
     <Grid Margin="25px">
         <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
                 </i:Interaction.Triggers>
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=Name, Mode=OneWay}" Width="8*"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=Name, Mode=TwoWay}" Width="8*"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="1*"></DataGridTextColumn>
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>

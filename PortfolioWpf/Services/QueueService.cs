@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace PortfolioWpf.Services
 {
-    public interface IAzureService
+    public interface IQueueService
     {
         Task AddIpsum(Data.LoremIpsum ipsum);
         Task UpdateIpsum(Data.LoremIpsum ipsum);
@@ -13,12 +13,12 @@ namespace PortfolioWpf.Services
         Task DeleteAll();
     }
 
-    public class AzureService : IAzureService
+    public class QueueService : IQueueService
     {
         private readonly ServiceBusContext _context;
         private JsonSerializerOptions _jsonOptions = new() { WriteIndented = false };
 
-        public AzureService (ServiceBusContext context)
+        public QueueService(ServiceBusContext context)
         {
             _context = context;
         }
