@@ -17,8 +17,6 @@ namespace Portfolio.Functions
         [FunctionName("LoremIpsumChange")]
         public static async Task LoremIpsumChange([ServiceBusTrigger("portfolio", Connection = "sbConn")] string queueItem, ILogger log)
         {
-            log.LogInformation($"C# ServiceBus queue trigger function processed message: {queueItem}");
-
             var ipsum = System.Text.Json.JsonSerializer.Deserialize<LoremIpsum>(queueItem);
 
             using (var db = new LoremIpsumContext())
@@ -59,12 +57,9 @@ namespace Portfolio.Functions
 
                 using (var response = await httpClient.PostAsync("https://localhost:7055/api/IpsumChanged", content))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-
+                    var apiResponse = await response.Content.ReadAsStringAsync();
                 }
             }
-
-            //return new OkObjectResult(null);
         }
     }
 }

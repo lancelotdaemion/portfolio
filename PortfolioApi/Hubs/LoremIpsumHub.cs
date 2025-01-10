@@ -6,7 +6,7 @@ namespace PortfolioApi.Hubs
     {
         public override async Task OnConnectedAsync()
         {
-            await Clients.Clients(Context.ConnectionId).ReceivedNotification(new LoremIpsum { Name = "dfsfdsfs" });
+            //await Clients.Clients(Context.ConnectionId).ReceivedNotification(new LoremIpsum { Name = "dfsfdsfs" });
 
             await base.OnConnectedAsync();
         }

@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApi", "PortfolioAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Functions", "Portfolio.Functions\Portfolio.Functions.csproj", "{79A61478-373E-4B3B-8371-2A6FAA4A37C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Web", "Portfolio.Web\Portfolio.Web\Portfolio.Web.csproj", "{6412F85D-B7D3-4BE5-9510-938756B24C94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Web.Client", "Portfolio.Web\Portfolio.Web.Client\Portfolio.Web.Client.csproj", "{09511849-113E-4CC0-8EDB-036443786C3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{79A61478-373E-4B3B-8371-2A6FAA4A37C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79A61478-373E-4B3B-8371-2A6FAA4A37C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79A61478-373E-4B3B-8371-2A6FAA4A37C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6412F85D-B7D3-4BE5-9510-938756B24C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6412F85D-B7D3-4BE5-9510-938756B24C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6412F85D-B7D3-4BE5-9510-938756B24C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6412F85D-B7D3-4BE5-9510-938756B24C94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09511849-113E-4CC0-8EDB-036443786C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09511849-113E-4CC0-8EDB-036443786C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09511849-113E-4CC0-8EDB-036443786C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09511849-113E-4CC0-8EDB-036443786C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
