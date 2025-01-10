@@ -29,6 +29,8 @@ namespace FunctionApp1
 
                         dbIpsumToEdit.Name = ipsum.Name;
                         dbIpsumToEdit.Value = ipsum.Value;
+                        dbIpsumToEdit.PreviousValue = ipsum.PreviousValue;
+                        dbIpsumToEdit.PercentageChange = ipsum.PercentageChange;
 
                         break;
                     case LoremIpsumType.Delete:

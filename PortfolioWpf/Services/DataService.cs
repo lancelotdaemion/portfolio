@@ -45,6 +45,7 @@ namespace PortfolioWpf.Services
             var dec = Convert.ToDecimal(doub);
 
             ip.Value = Math.Round(dec, 2);
+            ip.PreviousValue = ip.Value;
 
             return ip;
         }

@@ -15,6 +15,8 @@ namespace PortfolioApi
         public Guid Id { get; set; }
         public string Name { get; set; }
         public decimal Value { get; set; }
+        public decimal PreviousValue { get; set; }
+        public decimal PercentageChange { get; set; }
         public LoremIpsumType Type { get; set; }
 
         public override string ToString() => Name;

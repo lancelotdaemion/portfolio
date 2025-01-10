@@ -27,12 +27,19 @@ namespace PortfolioWpf.Services
         {
             ipsum.Type = LoremIpsumType.Add;
 
+            ipsum.PreviousValue = ipsum.Value;
+            ipsum.PercentageChange = 0;
+
             await Send(ipsum);
         }
 
         public async Task UpdateIpsum(Data.LoremIpsum ipsum)
         {
-            ipsum.Type = LoremIpsumType.Edit;
+            ipsum.Type = LoremIpsumType.Edit;            
+
+            ipsum.PercentageChange = ((ipsum.Value - ipsum.PreviousValue) / Math.Abs(ipsum.PreviousValue)) * 100;
+
+            ipsum.PreviousValue = ipsum.Value;
 
             await Send(ipsum);
         }

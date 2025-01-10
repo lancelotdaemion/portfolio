@@ -37,7 +37,7 @@ namespace PortfolioWpf.ViewModels
         {
             var newIpsum = _dataService.AddIpsum(CurrentIpsumText);
 
-            Ipsums.Add(new Data.LoremIpsum { Id = newIpsum.Id, Name = newIpsum.Name, Value = newIpsum.Value });
+            Ipsums.Add(new Data.LoremIpsum { Id = newIpsum.Id, Name = newIpsum.Name, Value = newIpsum.Value, PreviousValue = newIpsum.Value, PercentageChange = 0 });
 
             CurrentIpsumText = DefaultIpsomText();
 
