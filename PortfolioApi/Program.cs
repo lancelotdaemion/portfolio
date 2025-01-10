@@ -15,7 +15,7 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-app.UseCors(c => c.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod());
+app.UseCors(c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

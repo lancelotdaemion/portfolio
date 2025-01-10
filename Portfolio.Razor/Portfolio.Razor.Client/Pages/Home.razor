@@ -1,14 +1,18 @@
 ﻿@page "/"
-@using Microsoft.AspNetCore.SignalR.Client
-@using MudBlazor
-@using System.Net.Http;
 
-@* @inject HttpClient httpClient *@
+@using Microsoft.AspNetCore.SignalR.Client
+@using Portfolio.Blazor
+@using MudBlazor
+@using System.Collections.ObjectModel
+@using System.Net.Http
+@using System.Net.Http.Json
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
 <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
 
 <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+<PageTitle>Home</PageTitle>
 
 @* Required *@
 <MudThemeProvider />
@@ -20,8 +24,7 @@
 @* Needed for snackbars *@
 <MudSnackbarProvider />
 
-<button @onclick="RemoveItem">fdsfd</button>
-
+<MudButton OnClick="RemoveItem">fsfd</MudButton>
 
 <MudDataGrid Items="@_ipsums">
     <Columns>
@@ -31,38 +34,37 @@
     </Columns>
 </MudDataGrid>
 
-@code{
+@code {
     private HubConnection _hubConnection;
-    private IEnumerable<LoremIpsum> _ipsums;
-
-
+    private ObservableCollection<LoremIpsum> _ipsums;
 
     protected override async Task OnInitializedAsync()
     {
-        // _hubConnection = new HubConnectionBuilder()
-        //                         .WithUrl("https://localhost:7055/lorem_ipsum_notifications")
-        //                         .Build();
-
-        // _hubConnection.On<LoremIpsum>("ReceivedNotification", message =>
-        // {
-        //     InvokeAsync(StateHasChanged);
-        // });
-
-        // await _hubConnection.StartAsync();
-
-        //Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
-
         using (var httpClient = new HttpClient())
         {
             var client = new HttpClient();
             using (var response = await client.GetAsync("https://localhost:7055/api/Ipsums"))
             {
-                _ipsums = await response.Content.ReadFromJsonAsync<List<LoremIpsum>>();
+                _ipsums = await response.Content.ReadFromJsonAsync<ObservableCollection<LoremIpsum>>();
             }
         }
+
+        _hubConnection = new HubConnectionBuilder()
+                                .WithUrl("https://localhost:7055/lorem_ipsum_notifications")
+                                .Build();
+
+        _hubConnection.On<LoremIpsum>("ReceivedNotification", message =>
+        {
+            InvokeAsync(StateHasChanged);
+        });
+
+        await _hubConnection.StartAsync();
     }
 
-    public void RemoveItem(){
-        string s = "";
+    public void RemoveItem()
+    {
+        //_ipsums.RemoveAt(1);
+
+        _ipsums.ElementAt(1).Name = "blah";
     }
 }
