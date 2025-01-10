@@ -7,27 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioWpf", "PortfolioWp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApi", "PortfolioApi\PortfolioApi.csproj", "{3E676F4E-B537-4924-A4B1-5784A0292B23}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PortfolioWeb", "PortfolioWeb\", "{5ED218CB-0EAE-426C-B97E-D9D6D554F7CC}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_52749"
-		Debug.AspNetCompiler.PhysicalPath = "PortfolioWeb\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52749\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_52749"
-		Release.AspNetCompiler.PhysicalPath = "PortfolioWeb\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52749\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "52749"
-		SlnRelativePath = "PortfolioWeb\"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Functions", "Portfolio.Functions\Portfolio.Functions.csproj", "{79A61478-373E-4B3B-8371-2A6FAA4A37C8}"
 EndProject
 Global
@@ -44,10 +23,6 @@ Global
 		{3E676F4E-B537-4924-A4B1-5784A0292B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E676F4E-B537-4924-A4B1-5784A0292B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E676F4E-B537-4924-A4B1-5784A0292B23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5ED218CB-0EAE-426C-B97E-D9D6D554F7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ED218CB-0EAE-426C-B97E-D9D6D554F7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5ED218CB-0EAE-426C-B97E-D9D6D554F7CC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ED218CB-0EAE-426C-B97E-D9D6D554F7CC}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{79A61478-373E-4B3B-8371-2A6FAA4A37C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79A61478-373E-4B3B-8371-2A6FAA4A37C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79A61478-373E-4B3B-8371-2A6FAA4A37C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
