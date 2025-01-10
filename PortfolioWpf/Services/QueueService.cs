@@ -46,7 +46,7 @@ namespace PortfolioWpf.Services
 
         public async Task DeleteIpsum(Data.LoremIpsum ipsum)
         {
-            ipsum.Type = LoremIpsumType.Delete;
+            ipsum.Type = LoremIpsumType.Delete;            
 
             await Send(ipsum);
         }
@@ -56,6 +56,7 @@ namespace PortfolioWpf.Services
             var ipsum = new Data.LoremIpsum();
 
             ipsum.Type = LoremIpsumType.DeleteAll;
+            ipsum.Name = "deleteall";
 
             await Send(ipsum);
         }

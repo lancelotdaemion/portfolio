@@ -24,13 +24,11 @@
 @* Needed for snackbars *@
 <MudSnackbarProvider />
 
-<MudButton OnClick="RemoveItem">fsfd</MudButton>
-
 <MudDataGrid Items="@_ipsums">
     <Columns>
-        <PropertyColumn Property="x => x.Name" Title="Nr" />
-        <PropertyColumn Property="x => x.Value" />
-        <PropertyColumn Property="x => x.PercentageChange" />
+        <PropertyColumn Property="x => x.Name" Title="Name" />
+        <PropertyColumn Property="x => x.Value" Title="Value" />
+        <PropertyColumn Property="x => x.PercentageChange" Title="Percentage Changed" />
     </Columns>
 </MudDataGrid>
 
@@ -43,6 +41,7 @@
         using (var httpClient = new HttpClient())
         {
             var client = new HttpClient();
+
             using (var response = await client.GetAsync("https://localhost:7055/api/Ipsums"))
             {
                 _ipsums = await response.Content.ReadFromJsonAsync<ObservableCollection<LoremIpsum>>();
@@ -53,18 +52,25 @@
                                 .WithUrl("https://localhost:7055/lorem_ipsum_notifications")
                                 .Build();
 
-        _hubConnection.On<LoremIpsum>("ReceivedNotification", message =>
+        _hubConnection.On<LoremIpsum>("ReceivedNotification", ipsum =>
         {
+            switch (ipsum.Type) {
+                case LoremIpsumType.Add:
+                    _ipsums.Add(ipsum);
+                    break;
+                case LoremIpsumType.Delete:
+                    var index = _ipsums.IndexOf(_ipsums.Where(X => X.Id == ipsum.Id).Single());
+
+                    _ipsums.RemoveAt(index);
+                    break;
+                case LoremIpsumType.DeleteAll:
+                    _ipsums.Clear();
+                    break;
+            }
+
             InvokeAsync(StateHasChanged);
         });
 
         await _hubConnection.StartAsync();
-    }
-
-    public void RemoveItem()
-    {
-        //_ipsums.RemoveAt(1);
-
-        _ipsums.ElementAt(1).Name = "blah";
     }
 }
