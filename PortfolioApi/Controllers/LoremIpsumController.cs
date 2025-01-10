@@ -16,5 +16,11 @@ namespace PortfolioApi.Controllers
                 return ipsums;
             }
         }
+
+        [HttpPost, Route("/api/IpsumChanged")]
+        public void IpsumChanged(LoremIpsum ipsum)
+        {
+
+        }
     }
 }

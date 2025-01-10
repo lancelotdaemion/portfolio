@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FunctionApp1
+namespace Portfolio.Functions
 {
     public enum LoremIpsumType
     {

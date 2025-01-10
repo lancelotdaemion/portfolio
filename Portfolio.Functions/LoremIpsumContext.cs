@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FunctionApp1
+namespace Portfolio.Functions
 {
     public class LoremIpsumContext : DbContext
     {

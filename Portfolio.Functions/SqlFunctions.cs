@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace FunctionApp1
+namespace Portfolio.Functions
 {
     public static class SqlTriggerBinding
     {
