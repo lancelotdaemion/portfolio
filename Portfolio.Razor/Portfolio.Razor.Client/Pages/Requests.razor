@@ -24,24 +24,24 @@
     <TabPanelHeader />
     <ChildContent>
 
-        <MudTabPanel Text="REST" OnClick="@((e)=> { RequestType = RequestTypeEnum.REST; Content = ""; })">
-        <MudCard Style="width: 100%">
-            <MudCardHeader>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h5">REST</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudStack Row="true">
-                    <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
-                    <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
-                </MudStack>
-                <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>                    
-            </MudCardContent>
-        </MudCard>
-    </MudTabPanel>
+        <MudTabPanel Text="REST" OnClick="@((e)=> { RequestType = RequestTypeEnum.REST; Request = "https://localhost:7055/api/Ipsums"; Content = ""; })">
+            <MudCard Style="width: 100%">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">REST</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudStack Row="true">
+                        <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
+                        <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
+                    </MudStack>
+                    <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>                    
+                </MudCardContent>
+            </MudCard>
+        </MudTabPanel>
 
-        <MudTabPanel Text="OData" OnClick="@((e)=> { RequestType = RequestTypeEnum.OData; Content = ""; })">
+        <MudTabPanel Text="OData" OnClick="@((e)=> { RequestType = RequestTypeEnum.OData; Request = "https://localhost:7055/odata/Ipsums"; Content = ""; })">
             <MudCard Style="width: 100%">
             <MudCardHeader>
                 <CardHeaderContent>
@@ -58,7 +58,7 @@
         </MudCard>
     </MudTabPanel>
 
-        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Content = ""; })">
+        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Request = ""; Content = ""; })">
             <MudCard Style="width: 100%">
             <MudCardHeader> 
                 <CardHeaderContent>
@@ -84,18 +84,37 @@
     private string Content { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {
+    { 
     }
 
     public void SendRequest(MouseEventArgs e)
     {
         switch(RequestType){
             case RequestTypeEnum.REST:
-                var client = new HttpClient();
+                var restCient = new HttpClient();
 
                 try
                 {
-                    using (var response = client.GetAsync(Request).Result)
+                    using (var response = restCient.GetAsync(Request).Result)
+                    {
+                        var result = response.Content.ReadAsStringAsync().Result;
+
+                        using (var jDoc = JsonDocument.Parse(result))
+                            Content = JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true });
+                    }
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                break;
+            case RequestTypeEnum.OData:
+                var odataClient = new HttpClient();
+
+                try
+                {
+                    using (var response = odataClient.GetAsync(Request).Result)
                     {
                         var result = response.Content.ReadAsStringAsync().Result;
 
