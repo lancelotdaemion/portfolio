@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioWpf", "PortfolioWpf\PortfolioWpf.csproj", "{7E3B004E-F1AF-4E35-B374-6E8D3119AE7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Wpf", "PortfolioWpf\Portfolio.Wpf.csproj", "{7E3B004E-F1AF-4E35-B374-6E8D3119AE7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApi", "PortfolioApi\PortfolioApi.csproj", "{3E676F4E-B537-4924-A4B1-5784A0292B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portfolio.Api", "PortfolioApi\Portfolio.Api.csproj", "{3E676F4E-B537-4924-A4B1-5784A0292B23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Functions", "Portfolio.Functions\Portfolio.Functions.csproj", "{79A61478-373E-4B3B-8371-2A6FAA4A37C8}"
 EndProject
