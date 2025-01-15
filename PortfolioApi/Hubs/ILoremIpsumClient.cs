@@ -1,4 +1,6 @@
-﻿namespace PortfolioApi.Hubs
+﻿using Portfolio.Api.Model;
+
+namespace PortfolioApi.Hubs
 {
     public interface ILoremIpsumClient
     {

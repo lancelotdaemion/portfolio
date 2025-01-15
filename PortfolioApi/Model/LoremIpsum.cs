@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PortfolioApi
+namespace Portfolio.Api.Model
 {
     public enum LoremIpsumType
     {
