@@ -28,7 +28,25 @@
     <Columns>
         <PropertyColumn Property="x => x.Name" Title="Name" />
         <PropertyColumn Property="x => x.Value" Title="Value" />
-        <PropertyColumn Property="x => x.PercentageChange" Title="Percentage Changed" />
+        <TemplateColumn>
+            <HeaderTemplate>
+                Percentage Changed
+            </HeaderTemplate>
+            <CellTemplate>
+                @if (context.Item.PercentageChange < 0)
+                {
+                    <span style="color: red;">@context.Item.PercentageChange</span>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" Color="Color.Error"></MudIcon>
+                }
+                else if (context.Item.PercentageChange > 0){
+                    <span style="color: green;">@context.Item.PercentageChange</span>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Success"></MudIcon>
+                }
+                else{
+                    <span>@context.Item.PercentageChange</span>
+                }
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
 </MudDataGrid>
 
@@ -48,7 +66,7 @@
             }
         }
 
-        
+
 
         _hubConnection = new HubConnectionBuilder()
                                 .WithUrl("https://localhost:7055/lorem_ipsum_notifications")
@@ -84,8 +102,32 @@
         await _hubConnection.StartAsync();
     }
 
-    private string RowStyleFunc(LoremIpsum arg1, int index)
+    private string RowStyleFunc(LoremIpsum lorem, int index)
     {
         return index % 2 == 0 ? "background-color:white" : "background-color:#fffaf0";
+    }
+
+    private string CellStyleFunc(decimal percentage)
+    {
+
+
+        return "font-weight:700;color:red!important;font-size:1.5em;background-color:yellow;";
+    }
+
+    private Func<LoremIpsum, string> _cellStyleFunc => x =>
+    {
+        if (x.PercentageChange < 0)
+            return "color:red!important;";
+        else if (x.PercentageChange > 0)
+            return "color:green!important;";
+        else
+            return "color:black!important;";
+    };
+
+    public string cellTemplate { 
+        get { 
+            
+            return ""; 
+        }
     }
 }
