@@ -24,7 +24,7 @@
 @* Needed for snackbars *@
 <MudSnackbarProvider />
 
-<MudDataGrid Items="@_ipsums">
+<MudDataGrid Items="@_ipsums" RowStyleFunc="RowStyleFunc">
     <Columns>
         <PropertyColumn Property="x => x.Name" Title="Name" />
         <PropertyColumn Property="x => x.Value" Title="Value" />
@@ -47,6 +47,8 @@
                 _ipsums = await response.Content.ReadFromJsonAsync<ObservableCollection<LoremIpsum>>();
             }
         }
+
+        
 
         _hubConnection = new HubConnectionBuilder()
                                 .WithUrl("https://localhost:7055/lorem_ipsum_notifications")
@@ -80,5 +82,10 @@
         });
 
         await _hubConnection.StartAsync();
+    }
+
+    private string RowStyleFunc(LoremIpsum arg1, int index)
+    {
+        return index % 2 == 0 ? "background-color:white" : "background-color:#fffaf0";
     }
 }
