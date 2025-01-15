@@ -1,6 +1,7 @@
 ﻿@page "/"
 
 @using MudBlazor
+@using System.Text.Json
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
 <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
@@ -19,19 +20,97 @@
 @* Needed for snackbars *@
 <MudSnackbarProvider />
 
-<MudTabs Outlined="true" Position="@Position.Left" Rounded="true" Border="true"
-         ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6">
-    <MudTabPanel Text="REST">
-        <MudText>Content One</MudText>
+<MudTabs Outlined="true" Position="@Position.Start" Rounded="true" Border="true" ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6" Style="width: 70%">
+    <TabPanelHeader />
+    <ChildContent>
+
+        <MudTabPanel Text="REST" OnClick="@((e)=> { RequestType = RequestTypeEnum.REST; Content = ""; })">
+        <MudCard Style="width: 100%">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">REST</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudStack Row="true">
+                    <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
+                    <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
+                </MudStack>
+                <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>                    
+            </MudCardContent>
+        </MudCard>
     </MudTabPanel>
-    <MudTabPanel Text="OData">
-        <MudText>Content Two</MudText>
+
+        <MudTabPanel Text="OData" OnClick="@((e)=> { RequestType = RequestTypeEnum.OData; Content = ""; })">
+            <MudCard Style="width: 100%">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">OData</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudStack Row="true">
+                    <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
+                    <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
+                </MudStack>
+                <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+                <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
+            </MudCardContent>
+        </MudCard>
     </MudTabPanel>
-    <MudTabPanel Text="GraphQL">
-        <MudText>Content Three</MudText>
+
+        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Content = ""; })">
+            <MudCard Style="width: 100%">
+            <MudCardHeader> 
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">GraphQL</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudStack Row="true">
+                    <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
+                    <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
+                </MudStack>
+                <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+                <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
+            </MudCardContent>
+        </MudCard>
     </MudTabPanel>
+    </ChildContent>
 </MudTabs>
 
 @code {
+    private string Request { get; set; } = "https://localhost:7055/api/Ipsums";
+    private RequestTypeEnum RequestType { get; set; }
+    private enum RequestTypeEnum { REST, OData, GraphQL};
+    private string Content { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    public void SendRequest(MouseEventArgs e)
+    {
+        switch(RequestType){
+            case RequestTypeEnum.REST:
+                var client = new HttpClient();
+
+                try
+                {
+                    using (var response = client.GetAsync(Request).Result)
+                    {
+                        var result = response.Content.ReadAsStringAsync().Result;
+
+                        using (var jDoc = JsonDocument.Parse(result))
+                            Content = JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true });
+                    }
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                break;
+        }
+    }
 }
