@@ -28,7 +28,7 @@
                 </i:Interaction.Triggers>
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=Name, Mode=TwoWay}" Width="8*"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="8*"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Width="1*"></DataGridTextColumn>
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>

@@ -57,11 +57,19 @@
             switch (ipsum.Type) {
                 case LoremIpsumType.Add:
                     _ipsums.Add(ipsum);
+
+                    break;
+                case LoremIpsumType.Edit:
+                    var editIndex = _ipsums.IndexOf(_ipsums.Where(X => X.Id == ipsum.Id).Single());
+
+                    _ipsums[editIndex] = ipsum;
+
                     break;
                 case LoremIpsumType.Delete:
-                    var index = _ipsums.IndexOf(_ipsums.Where(X => X.Id == ipsum.Id).Single());
+                    var deleteIndex = _ipsums.IndexOf(_ipsums.Where(X => X.Id == ipsum.Id).Single());
 
-                    _ipsums.RemoveAt(index);
+                    _ipsums.RemoveAt(deleteIndex);
+
                     break;
                 case LoremIpsumType.DeleteAll:
                     _ipsums.Clear();
