@@ -35,12 +35,12 @@
             <CellTemplate>
                 @if (context.Item.PercentageChange < 0)
                 {
-                    <span style="color: red;">@context.Item.PercentageChange</span>
                     <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" Color="Color.Error"></MudIcon>
+                    <span style="color: red;">@context.Item.PercentageChange</span>
                 }
                 else if (context.Item.PercentageChange > 0){
-                    <span style="color: green;">@context.Item.PercentageChange</span>
                     <MudIcon Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Success"></MudIcon>
+                    <span style="color: green;">@context.Item.PercentageChange</span>
                 }
                 else{
                     <span>@context.Item.PercentageChange</span>
