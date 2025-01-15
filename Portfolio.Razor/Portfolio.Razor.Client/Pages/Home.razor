@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/start"
 
 @using Microsoft.AspNetCore.SignalR.Client
 @using Portfolio.Blazor
@@ -60,9 +60,15 @@
         {
             var client = new HttpClient();
 
-            using (var response = await client.GetAsync("https://localhost:7055/api/Ipsums"))
+            try
             {
-                _ipsums = await response.Content.ReadFromJsonAsync<ObservableCollection<LoremIpsum>>();
+                using (var response = await client.GetAsync("https://localhost:7055/api/Ipsums"))
+                {
+                    _ipsums = await response.Content.ReadFromJsonAsync<ObservableCollection<LoremIpsum>>();
+                }
+            }
+            catch (Exception){
+                return;
             }
         }
 

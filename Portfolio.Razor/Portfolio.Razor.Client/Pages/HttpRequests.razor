@@ -1,0 +1,37 @@
+﻿@page "/"
+
+@using MudBlazor
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+
+<script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+<PageTitle>Requests</PageTitle>
+
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
+
+@* Needed for dialogs *@
+<MudDialogProvider />
+
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+
+<MudTabs Outlined="true" Position="@Position.Left" Rounded="true" Border="true"
+         ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6">
+    <MudTabPanel Text="REST">
+        <MudText>Content One</MudText>
+    </MudTabPanel>
+    <MudTabPanel Text="OData">
+        <MudText>Content Two</MudText>
+    </MudTabPanel>
+    <MudTabPanel Text="GraphQL">
+        <MudText>Content Three</MudText>
+    </MudTabPanel>
+</MudTabs>
+
+@code {
+
+}
