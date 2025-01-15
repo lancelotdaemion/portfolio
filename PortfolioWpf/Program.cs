@@ -24,7 +24,6 @@ static class Program
         // Create the container as usual.
         var container = new SimpleInjector.Container();
 
-        container.Register<LoremIpsumContext>(Lifestyle.Singleton);
         container.Register<ServiceBusContext>(Lifestyle.Singleton);
 
         // Register your types, for instance:

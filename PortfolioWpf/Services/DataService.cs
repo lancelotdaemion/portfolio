@@ -1,42 +1,43 @@
-﻿using Microsoft.Azure.Amqp.Framing;
-using PortfolioWpf.Data;
-using PortfolioWpf.ViewModels;
+﻿using PortfolioWpf.Data;
+using PortfolioWpf.Model;
 using System.Collections.ObjectModel;
-using System.Numerics;
-using System.Windows.Controls;
-using static Microsoft.Azure.Amqp.Serialization.SerializableType;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace PortfolioWpf.Services
 {
     public interface IDataService
     {
-        ObservableCollection<Data.LoremIpsum> GetIpsums();
-        Data.LoremIpsum AddIpsum(string ipsum);
+        Task<ObservableCollection<LoremIpsum>> GetIpsums();
+        LoremIpsum AddIpsum(string ipsum);
     }
 
     public class DataService : IDataService
     {
-        private readonly LoremIpsumContext _context;
 
-        public DataService(LoremIpsumContext context)
+        public async Task<ObservableCollection<LoremIpsum>> GetIpsums()
         {
-            _context = context;
+            ObservableCollection<LoremIpsum> ipsums = null;
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:7055/api/Ipsums"))
+                {
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+
+                    ipsums = JsonSerializer.Deserialize<ObservableCollection<LoremIpsum>>(apiResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    //ipsums = new ObservableCollection<LoremIpsum>(results);
+                }
+            }
+
+            return ipsums;
         }
 
-        public ObservableCollection<Data.LoremIpsum> GetIpsums()
+        public LoremIpsum AddIpsum(string ipsum)
         {
-            _context.ChangeTracker.AutoDetectChangesEnabled = false;
-
-            var rand = new Random();
-
-            var ipsums = _context.LoremIpsums;
-
-            return new ObservableCollection<Data.LoremIpsum>(ipsums);
-        }
-
-        public Data.LoremIpsum AddIpsum(string ipsum)
-        {
-            var ip = new Data.LoremIpsum {  Id = Guid.NewGuid(), Name = ipsum };
+            var ip = new LoremIpsum {  Id = Guid.NewGuid(), Name = ipsum };
 
             var random = new Random();
 

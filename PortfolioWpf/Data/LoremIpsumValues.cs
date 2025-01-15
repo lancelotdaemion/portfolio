@@ -1,8 +1,8 @@
-﻿namespace PortfolioWpf.LoremIpsum
+﻿namespace Portfolio.Wpf.LoremIpsum
 {
     public class Collection
     {
-        public static readonly List<Data.LoremIpsum> Values = new List<Data.LoremIpsum> {
+        public static readonly List<PortfolioWpf.Model.LoremIpsum> Values = new List<PortfolioWpf.Model.LoremIpsum> {
             new(){ Id = Guid.NewGuid(), Name = "Nam laoreet lectus eu pharetra dignissim." },
             new(){ Id = Guid.NewGuid(), Name = "Suspendisse aliquet metus at lectus sagittis, ut dictum mi convallis." },
             new(){ Id = Guid.NewGuid(), Name = "Ut sed nibh vel metus porttitor pretium nec sollicitudin orci." },

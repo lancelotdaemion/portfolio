@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using PortfolioApi.Hubs;
+using System.Collections.ObjectModel;
 
 namespace PortfolioApi.Controllers
 {

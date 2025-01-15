@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace PortfolioWpf.Data
+namespace PortfolioWpf.Model
 {
     public enum LoremIpsumType
     {
@@ -10,7 +10,7 @@ namespace PortfolioWpf.Data
         DeleteAll = 3
     }
 
-    public partial class LoremIpsum : ObservableObject
+    public class LoremIpsum : ObservableObject
     {
         public Guid Id { get; set; }
         

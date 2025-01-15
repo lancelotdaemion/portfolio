@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PortfolioWpf.Model;
 using PortfolioWpf.Services;
+using Portfolio.Wpf.LoremIpsum;
 
 namespace PortfolioWpf.ViewModels
 {
@@ -15,10 +17,10 @@ namespace PortfolioWpf.ViewModels
 
             CurrentIpsumText = DefaultIpsomText();
 
-            Ipsums = _dataService.GetIpsums();
+            Ipsums = _dataService.GetIpsums().Result;
         }
 
-        private async Task LoadIpsumsAsync() => Ipsums = _dataService.GetIpsums();
+        private async Task LoadIpsumsAsync() => Ipsums = _dataService.GetIpsums().Result;
 
         
 
@@ -26,9 +28,9 @@ namespace PortfolioWpf.ViewModels
         {
             var rand = new Random();
 
-            var ipsumIndex = rand.Next(0, LoremIpsum.Collection.Values.Count - 1);
+            var ipsumIndex = rand.Next(0, Collection.Values.Count - 1);
 
-            return LoremIpsum.Collection.Values.ElementAt(ipsumIndex).Name;
+            return Collection.Values.ElementAt(ipsumIndex).Name;
         }
 
 
@@ -37,7 +39,7 @@ namespace PortfolioWpf.ViewModels
         {
             var newIpsum = _dataService.AddIpsum(CurrentIpsumText);
 
-            Ipsums.Add(new Data.LoremIpsum { Id = newIpsum.Id, Name = newIpsum.Name, Value = newIpsum.Value, PreviousValue = newIpsum.Value, PercentageChange = 0 });
+            Ipsums.Add(new LoremIpsum { Id = newIpsum.Id, Name = newIpsum.Name, Value = newIpsum.Value, PreviousValue = newIpsum.Value, PercentageChange = 0 });
 
             CurrentIpsumText = DefaultIpsomText();
 
