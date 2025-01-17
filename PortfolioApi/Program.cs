@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.OData.ModelBuilder;
 using Portfolio.Model;
 using Portfolio.Api.Hubs;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,14 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped(http => new HttpClient());
 
 builder.Services.AddSignalR();
+
+builder.Configuration.AddAzureKeyVault(
+    new Uri(builder.Configuration["AzureKeyVault:VaultURI"]!),
+    new ClientSecretCredential(
+        tenantId: builder.Configuration["AzureKeyVault:TenantId"]!,
+        clientId: builder.Configuration["AzureKeyVault:ClientId"]!,
+        clientSecret: builder.Configuration["AzureKeyVault:ClientSecret"]!
+        ));
 
 var modelBuilder = new ODataConventionModelBuilder();
 
