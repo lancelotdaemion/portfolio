@@ -1,9 +1,23 @@
-﻿namespace PortfolioWpf.Data
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+namespace PortfolioWpf.Data
 {
     public class ServiceBusContext
     {
-        public string ConnectionString => @"Endpoint=sb://lancelot.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=EJsX17fQjeMqtZSdAqYRgcX63viu7mWrD+ASbN/a5nA=";
+        private readonly SecretClient _client;
+
+        public readonly string ConnectionString;
         public string Namespace => "lancelot";
         public string QueueName => "portfolio";
+
+        public ServiceBusContext()
+        {
+            _client = new SecretClient(new System.Uri("https://lancelotkv.vault.azure.net/"), new DefaultAzureCredential());
+
+            var secret = _client.GetSecret("queue", cancellationToken: new CancellationToken());
+
+            ConnectionString = secret.Value.Value;
+        }
     }
 }

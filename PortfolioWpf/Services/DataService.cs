@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 namespace PortfolioWpf.Services
 {
@@ -15,14 +17,23 @@ namespace PortfolioWpf.Services
 
     public class DataService : IDataService
     {
+        private readonly SecretClient _client;
+
+        public DataService() 
+        {
+            _client = new SecretClient(new System.Uri("https://lancelotkv.vault.azure.net/"), new DefaultAzureCredential());
+        }
+
 
         public async Task<ObservableCollection<LoremIpsum>> GetIpsums()
         {
             ObservableCollection<LoremIpsum> ipsums = null;
 
+            var secret = _client.GetSecret("api", cancellationToken: new CancellationToken());
+
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://localhost:7055/api/Ipsums"))
+                using (var response = await httpClient.GetAsync(secret.Value.Value))
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
 
