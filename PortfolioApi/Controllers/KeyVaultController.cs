@@ -7,17 +7,17 @@ using Microsoft.Extensions.Configuration;
 namespace Portfolio.Api.Controllers
 {
     [ApiController, Route("api/[controller]")]
-    public class TestController : ControllerBase
+    public class KeyVaultController : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
-        public TestController(IConfiguration configuration) {
+        public KeyVaultController(IConfiguration configuration) {
             _configuration = configuration;
         }
 
         [HttpGet]
-        [Route("api/secret")]
-        public string? GetSecret(string secretName)
+        [Route("secret")]
+        public string? Secret(string secretName)
         {
             return _configuration[secretName];
         }

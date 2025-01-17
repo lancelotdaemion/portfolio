@@ -7,6 +7,13 @@ namespace Portfolio.Api
     {
         public DbSet<LoremIpsum> LoremIpsums { get; set; }
 
+        private readonly IConfiguration _configuration;
+
+        public LoremIpsumContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         //public LoremIpsumContext() : base(@"Server=tcp:lancelot.database.windows.net,1433;Initial Catalog=Portfolio;Persist Security Info=False;User ID=lancelot;Password=Spuppy0224!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
         //{
 
@@ -17,7 +24,7 @@ namespace Portfolio.Api
             //optionsBuilder.UseAzureSql( "Data Source=products.db");
             //optionsBuilder.UseLazyLoadingProxies();
 
-            optionsBuilder.UseSqlServer(@"Server=tcp:lancelot.database.windows.net,1433;Initial Catalog=Portfolio;Persist Security Info=False;User ID=lancelot;Password=Spuppy0224!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer(_configuration["sql"]);
         }
     }
 }
