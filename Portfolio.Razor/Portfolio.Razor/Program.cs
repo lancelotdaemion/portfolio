@@ -1,3 +1,4 @@
+using Azure.Identity;
 using MudBlazor.Services;
 using Portfolio.Razor.Client.Pages;
 using Portfolio.Razor.Components;
@@ -10,6 +11,14 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 builder.Services.AddMudServices();
+
+builder.Configuration.AddAzureKeyVault(
+    new Uri(builder.Configuration["AzureKeyVault:VaultURI"]!),
+    new ClientSecretCredential(
+        tenantId: builder.Configuration["AzureKeyVault:TenantId"]!,
+        clientId: builder.Configuration["AzureKeyVault:ClientId"]!,
+        clientSecret: builder.Configuration["AzureKeyVault:ClientSecret"]!
+        ));
 
 var app = builder.Build();
 

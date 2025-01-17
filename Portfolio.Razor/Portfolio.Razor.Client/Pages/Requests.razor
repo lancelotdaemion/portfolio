@@ -3,6 +3,8 @@
 @using MudBlazor
 @using System.Text.Json
 
+@inject IConfiguration _configuration
+
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
 <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
 
@@ -24,7 +26,7 @@
     <TabPanelHeader />
     <ChildContent>
 
-        <MudTabPanel Text="REST" OnClick="@((e)=> { RequestType = RequestTypeEnum.REST; Request = "https://localhost:7055/api/Ipsums"; Content = ""; })">
+        <MudTabPanel Text="REST" OnClick="@((e)=> { RequestType = RequestTypeEnum.REST; Request = @_configuration["api"]; Content = ""; })">
             <MudCard Style="width: 100%">
                 <MudCardHeader>
                     <CardHeaderContent>
@@ -41,50 +43,51 @@
             </MudCard>
         </MudTabPanel>
 
-        <MudTabPanel Text="OData" OnClick="@((e)=> { RequestType = RequestTypeEnum.OData; Request = "https://localhost:7055/odata/Ipsums"; Content = ""; })">
+        <MudTabPanel Text="OData" OnClick="@((e)=> { RequestType = RequestTypeEnum.OData; Request = @_configuration["odata"]; Content = ""; })">
             <MudCard Style="width: 100%">
-            <MudCardHeader>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h5">OData</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudStack Row="true">
-                    <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
-                    <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
-                </MudStack>
-                <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
-            </MudCardContent>
-        </MudCard>
-    </MudTabPanel> 
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">OData</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudStack Row="true">
+                        <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
+                        <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
+                    </MudStack>
+                    <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
+                </MudCardContent>
+            </MudCard>
+        </MudTabPanel> 
 
-        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Request = @"http://localhost:7074/api/GraphQL?query={ipsums{id,name}}"; Content = ""; })">
+        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Request = @_configuration["graphql"]; Content = ""; })">
             <MudCard Style="width: 100%">
-            <MudCardHeader> 
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h5">GraphQL</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudStack Row="true">
-                    <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
-                    <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
-                </MudStack> 
-                <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
-            </MudCardContent>
-        </MudCard>
-    </MudTabPanel>
-    </ChildContent>
+                <MudCardHeader> 
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5">GraphQL</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudStack Row="true">
+                        <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
+                        <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
+                    </MudStack> 
+                    <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
+                </MudCardContent>
+            </MudCard> 
+        </MudTabPanel> 
+    </ChildContent> 
 </MudTabs>
 
 @code {
-    private string Request { get; set; } = "https://localhost:7055/api/Ipsums";
+    private string Request { get; set; }
     private RequestTypeEnum RequestType { get; set; }
     private enum RequestTypeEnum { REST, OData, GraphQL};
     private string Content { get; set; }
 
     protected override async Task OnInitializedAsync()
-    { 
+    {
+        Request = @_configuration["api"];
     }
 
     public void SendRequest(MouseEventArgs e)
