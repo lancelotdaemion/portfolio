@@ -2,7 +2,7 @@
 {
     public class Collection
     {
-        public static readonly List<PortfolioWpf.Model.LoremIpsum> Values = new List<PortfolioWpf.Model.LoremIpsum> {
+        public static readonly List<Model.LoremIpsum> Values = new List<Model.LoremIpsum> {
             new(){ Id = Guid.NewGuid(), Name = "Nam laoreet lectus eu pharetra dignissim." },
             new(){ Id = Guid.NewGuid(), Name = "Suspendisse aliquet metus at lectus sagittis, ut dictum mi convallis." },
             new(){ Id = Guid.NewGuid(), Name = "Ut sed nibh vel metus porttitor pretium nec sollicitudin orci." },

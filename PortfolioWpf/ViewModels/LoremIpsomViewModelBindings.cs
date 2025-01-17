@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using PortfolioWpf.Model;
+using Portfolio.Model;
 using System.Collections.ObjectModel;
 
 namespace PortfolioWpf.ViewModels

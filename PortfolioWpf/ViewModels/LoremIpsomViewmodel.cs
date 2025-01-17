@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PortfolioWpf.Model;
+using Portfolio.Model;
 using PortfolioWpf.Services;
 using Portfolio.Wpf.LoremIpsum;
 

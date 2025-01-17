@@ -1,5 +1,5 @@
 ﻿using PortfolioWpf.Data;
-using PortfolioWpf.Model;
+using Portfolio.Model;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;

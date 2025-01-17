@@ -1,6 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
 using PortfolioWpf.Data;
-using PortfolioWpf.Model;
+using Portfolio.Model;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
