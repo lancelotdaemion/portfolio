@@ -1,6 +1,7 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Sql;
 using Microsoft.Extensions.Logging;
+using Portfolio.Model;
 using System.Collections.Generic;
 using System.Text.Json;
 

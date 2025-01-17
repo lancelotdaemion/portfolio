@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Portfolio.Api.Model;
-using PortfolioApi.Hubs;
+using Portfolio.Model;
+using Portfolio.Api.Hubs;
 
-namespace PortfolioApi.Controllers
+namespace Portfolio.Api.Controllers
 {
     [ApiController, Route("api/[controller]")]
     public class SignalRController : ControllerBase

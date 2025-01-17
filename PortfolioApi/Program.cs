@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.OData;
 using Microsoft.OData.ModelBuilder;
-using Portfolio.Api.Model;
-using PortfolioApi.Hubs;
+using Portfolio.Model;
+using Portfolio.Api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 

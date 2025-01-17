@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Razor", "Portfoli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Razor.Client", "Portfolio.Razor\Portfolio.Razor.Client\Portfolio.Razor.Client.csproj", "{45C949EF-36D9-4C03-A079-C01AF0EEE710}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Model", "Portfolio.Model\Portfolio.Model.csproj", "{F8AC75AF-99C6-4FDF-83B5-B83F5492B90A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{45C949EF-36D9-4C03-A079-C01AF0EEE710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45C949EF-36D9-4C03-A079-C01AF0EEE710}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45C949EF-36D9-4C03-A079-C01AF0EEE710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8AC75AF-99C6-4FDF-83B5-B83F5492B90A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8AC75AF-99C6-4FDF-83B5-B83F5492B90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8AC75AF-99C6-4FDF-83B5-B83F5492B90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AC75AF-99C6-4FDF-83B5-B83F5492B90A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

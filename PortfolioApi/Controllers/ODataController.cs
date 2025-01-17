@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
-using Portfolio.Api.Model;
+using Portfolio.Model;
 
-namespace PortfolioApi.Controllers
+namespace Portfolio.Api.Controllers
 {
     [ApiController, Route("api/[controller]")]
     public class ODataController : Microsoft.AspNetCore.OData.Routing.Controllers.ODataController

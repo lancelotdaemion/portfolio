@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Portfolio.Api.Model;
+using Portfolio.Model;
+using Portfolio.Api;
 
-namespace PortfolioApi.Controllers
+namespace Portfolio.Api.Controllers
 {
     [ApiController, Route("api/[controller]")]
     public class DbController : ControllerBase

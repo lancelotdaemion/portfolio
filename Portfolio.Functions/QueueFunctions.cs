@@ -1,13 +1,11 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+using Portfolio.Model;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Portfolio.Functions
@@ -53,7 +51,7 @@ namespace Portfolio.Functions
 
             using (var httpClient = new HttpClient())
             {
-                StringContent content = new StringContent(queueItem, Encoding.UTF8, "application/json");
+                var content = new StringContent(queueItem, Encoding.UTF8, "application/json");
 
                 using (var response = await httpClient.PostAsync("https://localhost:7055/api/IpsumChanged", content))
                 {

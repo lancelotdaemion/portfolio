@@ -18,4 +18,8 @@
     <PackageReference Include="SimpleInjector" Version="5.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Model\Portfolio.Model.csproj" />
+  </ItemGroup>
+
 </Project>

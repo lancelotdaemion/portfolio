@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Portfolio.Api.Model;
+using Portfolio.Model;
 
-namespace PortfolioApi
+namespace Portfolio.Api
 {
     public class LoremIpsumContext : DbContext
     {

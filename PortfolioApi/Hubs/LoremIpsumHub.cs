@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace PortfolioApi.Hubs
+namespace Portfolio.Api.Hubs
 {
     public class LoremIpsumHub : Hub<ILoremIpsumClient>
     {
