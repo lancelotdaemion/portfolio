@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Portfolio.Functions
+namespace Portfolio.Functions.GraphQl
 {
     internal class StarWarsDB
     {

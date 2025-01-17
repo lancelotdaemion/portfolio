@@ -56,9 +56,9 @@
                 <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
             </MudCardContent>
         </MudCard>
-    </MudTabPanel>
+    </MudTabPanel> 
 
-        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Request = ""; Content = ""; })">
+        <MudTabPanel Text="GraphQL" OnClick="@((e)=> { RequestType = RequestTypeEnum.GraphQL; Request = @"http://localhost:7074/api/GraphQL?query={ipsums{id,name}}"; Content = ""; })">
             <MudCard Style="width: 100%">
             <MudCardHeader> 
                 <CardHeaderContent>
@@ -69,7 +69,7 @@
                 <MudStack Row="true">
                     <MudTextField @bind-Value="Request" Label="Request" Variant="Variant.Text"></MudTextField>
                     <MudButton OnClick="@((e)=> SendRequest(e))">Send</MudButton>
-                </MudStack>
+                </MudStack> 
                 <MudTextField @bind-Value="Content" Label="Response" Lines="45" Variant="Variant.Text"></MudTextField>
             </MudCardContent>
         </MudCard>
@@ -115,6 +115,25 @@
                 try
                 {
                     using (var response = odataClient.GetAsync(Request).Result)
+                    {
+                        var result = response.Content.ReadAsStringAsync().Result;
+
+                        using (var jDoc = JsonDocument.Parse(result))
+                            Content = JsonSerializer.Serialize(jDoc, new JsonSerializerOptions { WriteIndented = true });
+                    }
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                break;
+            case RequestTypeEnum.GraphQL:
+                var grahpqlClient = new HttpClient();
+
+                try
+                {
+                    using (var response = grahpqlClient.GetAsync(Request).Result)
                     {
                         var result = response.Content.ReadAsStringAsync().Result;
 
