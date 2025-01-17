@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using Portfolio.Functions.GraphQl;
 using System.Threading.Tasks;
 
-namespace Portfolio.Functions
+namespace Portfolio.Functions.GraphQl
 {
     public static class GraphQlFunctions
     {

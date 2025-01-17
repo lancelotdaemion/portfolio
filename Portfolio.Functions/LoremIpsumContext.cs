@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.EntityFrameworkCore;
 using Portfolio.Model;
+using System.Threading;
 
 namespace Portfolio.Functions
 {
@@ -7,17 +10,21 @@ namespace Portfolio.Functions
     {
         public DbSet<LoremIpsum> LoremIpsums { get; set; }
 
-        //public LoremIpsumContext() : base(@"Server=tcp:lancelot.database.windows.net,1433;Initial Catalog=Portfolio;Persist Security Info=False;User ID=lancelot;Password=Spuppy0224!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
-        //{
+        private readonly SecretClient _client;
 
-        //}
+        public LoremIpsumContext()
+        {
+            _client = new SecretClient(new System.Uri("https://lancelotkv.vault.azure.net/"), new DefaultAzureCredential());
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseAzureSql( "Data Source=products.db");
             //optionsBuilder.UseLazyLoadingProxies();
 
-            optionsBuilder.UseSqlServer(@"Server=tcp:lancelot.database.windows.net,1433;Initial Catalog=Portfolio;Persist Security Info=False;User ID=lancelot;Password=Spuppy0224!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            var secret = _client.GetSecret("sql", cancellationToken: new CancellationToken());
+
+            optionsBuilder.UseSqlServer(secret.Value.Value);
         }
     }
 }
